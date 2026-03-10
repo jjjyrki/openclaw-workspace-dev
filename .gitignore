@@ -1,0 +1,33 @@
+# npm cache, logs, and npx cache
+.npm/
+
+# OpenClaw runtime state
+.openclaw/
+
+# Cursor IDE state
+.cursor/
+.cursorignore
+
+# Cloned repositories (have their own git history)
+claw-plans/
+hltv-scraper/
+
+# Temp / scratch files
+_recheck_*
+*.tmp
+*.swp
+*.log
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+.git-credentials
+.bash_history
