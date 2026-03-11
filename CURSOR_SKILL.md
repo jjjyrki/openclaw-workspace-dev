@@ -1,154 +1,62 @@
-This file explains how to use cursor agent for various software engineering tasks.
+# CURSOR_SKILL.md
 
-### Setup api token
-Before starting, set up the api token so that cursor cli will detect it.
+Detailed reference for Cursor CLI (`agent`). See `TOOLS.md` for the quick guide.
 
+## Setup
 ```bash
 export CURSOR_API_KEY=$CURSOR
 ```
 
-### Update
-Keep your CLI up to date:
+## Flags
+- `--yolo` — auto-apply all changes (required for automation)
+- `--model <name>` — prefer `composer-1.5` or `auto`
+- `--trust` — trust workspace on first run
+- `-p` / `--print` — non-interactive output (no TTY, but also no file writes — avoid for implementation)
 
+## tmux pattern (required for automation)
 ```bash
-agent update
-```
-
-### Session Management
-
-Manage your agent sessions:
-
-- **List sessions:** `agent ls`
-- **Resume most recent:** `agent resume`
-- **Resume specific session:** `agent --resume="[chat-id]"`
-
-### Context Selection
-
-Include specific files or folders in the conversation:
-
-```
-@filename.ts
-@src/components/
-```
-### Non-interactive / CI Mode
-
-Run the agent in a non-interactive mode, suitable for CI/CD pipelines:
-
-```bash
-agent -p 'Run tests and report coverage'
-# or
-agent --print 'Refactor this file to use async/await'
-```
-
-**Output formats:**
-
-```bash
-# Plain text (default)
-agent -p 'Analyze code' --output-format text
-
-# Structured JSON
-agent -p 'Find bugs' --output-format json
-
-# Real-time streaming JSON
-agent -p 'Run tests' --output-format stream-json --stream-partial-output
-```
-
-**Force mode (auto-apply changes without confirmation):**
-
-```bash
-agent -p 'Fix all linting errors' --force
-```
-
-**Media support:**
-
-```bash
-agent -p 'Analyze this screenshot: screenshot.png'
-```
-
-### ⚠️ Using with AI Agents / Automation (tmux required)
-
-**CRITICAL:** When running Cursor CLI from automated environments (AI agents, scripts, subprocess calls), the CLI requires a real TTY. Direct execution will hang indefinitely.
-
-**The Solution: Use tmux**
-
-```bash
-# 1. Install tmux if not available
-sudo apt install tmux  # Ubuntu/Debian
-brew install tmux      # macOS
-
-# 2. Create a tmux session
 tmux kill-session -t cursor 2>/dev/null || true
 tmux new-session -d -s cursor
-
-# 3. Navigate to project
-tmux send-keys -t cursor "cd /path/to/project" Enter
+tmux send-keys -t cursor "cd /path/to/repo" Enter
 sleep 1
-
-# 4. Run Cursor agent
-tmux send-keys -t cursor "agent 'Your task here'" Enter
-
-# 5. Handle workspace trust prompt (first run)
+tmux send-keys -t cursor "export CURSOR_API_KEY=$CURSOR" Enter
+tmux send-keys -t cursor "agent --yolo --model composer-1.5 'PROMPT'" Enter
 sleep 3
-tmux send-keys -t cursor "a"  # Trust workspace
-
-# 6. Wait for completion
-sleep 60  # Adjust based on task complexity
-
-# 7. Capture output
-tmux capture-pane -t cursor -p -S -100
-
-# 8. Verify results
-ls -la /path/to/project/
+tmux send-keys -t cursor "a" Enter   # trust workspace if prompted (first run)
+sleep 60                              # adjust for task complexity
+tmux capture-pane -t cursor -p -S -200
 ```
 
-**Why this works:**
-- tmux provides a persistent pseudo-terminal (PTY)
-- Cursor's TUI requires interactive terminal capabilities
-- Direct `agent` calls from subprocess/exec hang without TTY
+## Context selection
 
-**What does NOT work:**
-```bash
-# ❌ These will hang indefinitely:
-agent "task"                    # No TTY
-agent -p "task"                 # No TTY  
-subprocess.run(["agent", ...])  # No TTY
-script -c "agent ..." /dev/null # May crash Cursor
+Include files in the prompt with `@`. More context = better output. Always include the task file minimum.
+
+```
+@/workspace/claw-plans/<project>/features/<feature>/tasks/Txxx.md
+@/workspace/<repo>/src/relevant-file.ts
+@/workspace/<repo>/tests/relevant-test.ts
 ```
 
-## Rules & Configuration
+| Situation | Include in context |
+|---|---|
+| Implementing a task | Task file + relevant source files + test files |
+| Adding tests | Task file + source file under test + existing test files |
+| Fixing a bug | Task file + failing test + buggy source file |
+| Following a skill | SKILL.md + task file + relevant source |
 
-The agent automatically loads rules from:
-- `.cursor/rules`
-- `AGENTS.md`
-- `CLAUDE.md`
+## Skills
 
-Use `/rules` command to create and edit rules directly from the CLI.
+OpenClaw mirrors skills into your sandbox at `/workspace/skills/`.
 
-## Workflows
+Read a skill first with the `read` tool, then pass it to Cursor:
 
-### Code Review
+```
+@/workspace/skills/<skill-name>/SKILL.md
+@/workspace/claw-plans/<project>/features/<feature>/tasks/Txxx.md
+@/workspace/<repo>/src/relevant-file.ts
 
-Perform a code review on the current changes or a specific branch:
-
-```bash
-agent -p 'Review the changes in the current branch against main. Focus on security and performance.'
+<your instruction here>
 ```
 
-### Refactoring
-
-Refactor code for better readability or performance:
-
-```bash
-agent -p 'Refactor src/utils.ts to reduce complexity and improve type safety.'
-```
-
-### Debugging
-
-Analyze logs or error messages to find the root cause:
-
-```bash
-agent -p 'Analyze the following error log and suggest a fix: [paste log here]'
-```
-
-
-
+## Rules loaded automatically
+Cursor reads `.cursor/rules`, `AGENTS.md`, and `CLAUDE.md` from the working directory.
