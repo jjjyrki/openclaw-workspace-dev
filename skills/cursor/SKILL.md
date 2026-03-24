@@ -1,6 +1,8 @@
-# CURSOR_SKILL.md
 
-Detailed reference for Cursor CLI (`agent`). See `TOOLS.md` for the quick guide.
+---
+name: cursor
+descriptino: Detailed reference for Cursor CLI (`agent`).
+---
 
 ## Setup
 ```bash

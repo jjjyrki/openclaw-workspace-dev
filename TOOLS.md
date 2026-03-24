@@ -1,4 +1,6 @@
 # TOOLS.md
+### Connectivity ### 
+- Use `host.docker.internal` to replace `localhost` or `172.17.0.1`
 
 ## Git
 - Use HTTPS for all git operations (`https://github.com/...`)
@@ -6,7 +8,7 @@
 
 ## Cursor CLI
 
-See `CURSOR_SKILLS.md` for full Cursor usage, context rules, and skill integration.
+See `/workspace/skills/cursor/SKILL.md` for full Cursor usage, context rules, and skill integration.
 
 ## Allowed
 - Read/edit source files

@@ -1,5 +1,5 @@
 # USER.md
 
-- **Name:**
-- **Timezone:**
+- **Name:** Boss
+- **Timezone:** Europe/Finland
 - **Notes:**

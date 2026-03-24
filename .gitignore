@@ -31,3 +31,9 @@ Thumbs.db
 
 .git-credentials
 .bash_history
+
+# Git LFS large files & Cursor agent runtimes
+.local/
+config/config.json.bak
+coverage/
+*.log
