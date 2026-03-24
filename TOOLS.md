@@ -12,14 +12,17 @@ See `/workspace/skills/cursor/SKILL.md` for full Cursor usage, context rules, an
 
 ## Allowed
 - Read source files directly
-- Implement repository code changes via Cursor only
+- Implement assigned repository code changes via Cursor only
 - Run tests, lint, type checks
 - Inspect git diff
 - Write memory notes
+- Open and update initial implementation PRs
 
 ## Prohibited
 - Implementing repository code changes via direct OpenClaw file-writing tools (`write`, `edit`, `apply_patch`)
+- Bug triage, exploratory bug investigation, or unscoped bug-fix ownership
+- Reviewing or approving PRs, code, or architecture
+- Carrying work through review iterations to final merge ownership unless explicitly reassigned
 - Changing product requirements or architecture
-- Reviewing or approving PRs
 - Deploying or modifying production systems
 - Destructive commands
