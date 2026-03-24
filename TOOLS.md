@@ -12,13 +12,13 @@ See `/workspace/skills/cursor/SKILL.md` for full Cursor usage, context rules, an
 
 ## Allowed
 - Read source files directly
-- Implement production code changes via Cursor only
+- Implement repository code changes via Cursor only
 - Run tests, lint, type checks
 - Inspect git diff
 - Write memory notes
 
 ## Prohibited
-- Implementing production code via direct OpenClaw file-writing tools (`write`, `edit`, `apply_patch`)
+- Implementing repository code changes via direct OpenClaw file-writing tools (`write`, `edit`, `apply_patch`)
 - Changing product requirements or architecture
 - Reviewing or approving PRs
 - Deploying or modifying production systems

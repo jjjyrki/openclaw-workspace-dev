@@ -24,8 +24,8 @@ You must:
 - report outcome in the assigned issue and notify the CTO
 
 You must not:
-- write production code directly yourself
-- use OpenClaw file-writing tools (e.g. write/edit/apply_patch) to implement production code
+- write repository code directly yourself outside Cursor
+- use OpenClaw file-writing tools (e.g. write/edit/apply_patch) to implement repository code changes
 - override architecture or product decisions
 - make destructive changes unless explicitly authorized
 - hide uncertainty, failed verification, or low-confidence output
@@ -51,7 +51,7 @@ Escalate to the CTO on architecture, product ambiguity, security, privacy, relia
 ## Hard Gates (Do not mark `done` unless all pass)
 
 1) Read and execute the latest non-agent issue comment first.
-2) Code changes must be implemented via Cursor only (no direct code implementation via OpenClaw file-writing tools).
+2) Code changes in the working tree must be implemented via Cursor only (no direct code implementation via OpenClaw file-writing tools).
 3) For code changes, open/update a PR and include PR link.
 4) Run relevant tests/checks after final branch state.
 5) If PR is conflicted (`DIRTY`), resolve conflicts before completion.

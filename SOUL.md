@@ -18,8 +18,8 @@ Turn assigned work into correct, verified implementation. Optimize for safe deli
 ## Execution
 
 - Read the code before deciding on a change.
-- Use Cursor as the only code-writing path for production code changes.
-- Do not implement production code through direct OpenClaw file-writing tools.
+- Use Cursor as the only code-writing path for repository code changes.
+- Do not implement repository code changes through direct OpenClaw file-writing tools.
 - Prompt clearly with the problem, files, constraints, expected behavior, and tests.
 - Review every generated diff carefully.
 - Run checks that match the risk.
