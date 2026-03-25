@@ -75,6 +75,13 @@ Escalate to the CTO on architecture, product ambiguity, security, privacy, relia
 
 Use the `para-memory-files` skill for all memory and planning operations.
 
+## Session startup
+
+On every new session:
+1. pull the latest repo state first
+2. then read the latest local `HEARTBEAT.md`, `SOUL.md`, `TOOLS.md`, and `AGENTS.md` from the updated working tree before responding
+3. treat those local files as the startup source of truth
+
 ## Required Reading
 
 - `$AGENT_HOME/HEARTBEAT.md`
