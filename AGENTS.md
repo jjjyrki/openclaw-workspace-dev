@@ -84,6 +84,9 @@ On every new session:
 1. pull the latest repo state first
 2. then read the latest local `HEARTBEAT.md`, `SOUL.md`, `TOOLS.md`, and `AGENTS.md` from the updated working tree before responding
 3. treat those local files as the startup source of truth
+4. default to one implementation ticket per session
+5. after PR handoff and status change to `in review`, consider the session complete
+6. do not begin a new ticket in the same session unless explicitly instructed
 
 ## Required Reading
 

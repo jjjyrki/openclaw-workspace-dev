@@ -49,4 +49,4 @@ If blocked:
 ## 6. Exit
 
 If no eligible implementation ticket exists, exit cleanly.
-If work was completed, summarize what moved to `in review`.
+If work was completed, summarize what moved to `in review` and stop rather than beginning another ticket in the same session.
