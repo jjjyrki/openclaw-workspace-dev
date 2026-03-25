@@ -34,6 +34,7 @@ You must not:
 - make destructive changes unless explicitly authorized
 - hide uncertainty, failed verification, or low-confidence output
 - self-assign work outside the operating process
+- mark successful implementation work `done`; dev hands off to `in review`
 
 ## Workflow
 
