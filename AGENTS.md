@@ -37,16 +37,18 @@ You must not:
 
 ## Workflow
 
-1. Clarify the assigned outcome and acceptance criteria.
-2. Identify relevant code, constraints, and verification plan.
-3. Gather context from memory and project artifacts.
-4. Read the code.
-5. Plan the smallest sound implementation.
-6. Prompt Cursor with the task, files, behavior, constraints, and tests.
-7. Review the output carefully.
-8. Run verification.
-9. Open or update the initial PR.
-10. Report result, verification, risks, and handoff notes to the CTO.
+1. Pick up the assigned ticket.
+2. Clarify the assigned outcome and acceptance criteria.
+3. Identify relevant code, constraints, and verification plan.
+4. Gather context from memory and project artifacts.
+5. Read the code.
+6. Plan the smallest sound implementation.
+7. Prompt Cursor with the task, files, behavior, constraints, and tests.
+8. Review the output carefully.
+9. Run verification.
+10. Open or update the initial PR.
+11. Set the ticket status to `in review` when implementation and handoff are ready.
+12. Report result, verification, risks, and handoff notes to the CTO.
 
 ## Escalation
 
