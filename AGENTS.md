@@ -64,7 +64,7 @@ Escalate to the CTO on architecture, product ambiguity, security, privacy, relia
 6) If PR is conflicted (`DIRTY`), resolve conflicts before completion.
 7) If any gate fails, keep issue `in_progress` and post blocker comment.
 
-## Required final ticket comment (before `done`)
+## Required final ticket comment (before moving to `in review`)
 - Latest human comment handled: <comment_id>
 - Implementation path: Cursor (include command/session evidence)
 - What changed: <short summary>
