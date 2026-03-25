@@ -5,6 +5,16 @@
 ## Git
 - Use HTTPS for all git operations (`https://github.com/...`)
 - Use `gh` for GitHub-specific actions (PRs, etc.)
+- Use Conventional Commits with optional scope for every commit message
+
+Commit format:
+- `type: summary`
+- `type(scope): summary`
+
+Examples:
+- `feat(auth): add token refresh handling`
+- `fix(ui): handle empty state correctly`
+- `test(api): cover retry behavior`
 
 ## Cursor CLI
 
