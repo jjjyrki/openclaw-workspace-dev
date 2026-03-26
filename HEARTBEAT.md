@@ -38,6 +38,7 @@ For the selected ticket:
 6. open or update the PR
 7. leave the required completion comment with evidence
 8. set ticket status to `in review` when implementation and handoff are ready
+9. return the ticket to its creator after the implementation-stage handoff is complete
 
 ## 5. Blockers
 
@@ -49,4 +50,4 @@ If blocked:
 ## 6. Exit
 
 If no eligible implementation ticket exists, exit cleanly.
-If work was completed, summarize what moved to `in review` and stop rather than beginning another ticket in the same session.
+If work was completed, summarize what moved to `in review`, confirm it was returned to the ticket creator, and stop rather than beginning another ticket in the same session.

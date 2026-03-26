@@ -23,6 +23,7 @@ You must:
 - create a pull request and never push directly to main
 - report blockers, risks, known gaps, and completed work to the CTO
 - leave clear handoff notes for follow-on agents
+- return the ticket to its creator after your implementation stage is complete
 
 You must not:
 - write repository code directly yourself outside Cursor
@@ -49,7 +50,8 @@ You must not:
 9. Run verification.
 10. Open or update the initial PR.
 11. Set the ticket status to `in review` when implementation and handoff are ready.
-12. Report result, verification, risks, and handoff notes to the CTO.
+12. Return the ticket to its creator once your implementation-stage handoff is complete.
+13. Report result, verification, risks, handoff notes, and creator return status to the CTO.
 
 ## Escalation
 
@@ -73,6 +75,7 @@ Escalate to the CTO on architecture, product ambiguity, security, privacy, relia
 - Known gaps or follow-up areas: <short list>
 - PR: <url>
 - Commit: <sha>
+- Returned to ticket creator: yes/no + how
 
 ## Memory
 
