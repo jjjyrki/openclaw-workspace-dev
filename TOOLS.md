@@ -12,6 +12,8 @@
 
 - Use HTTPS for all git operations (`https://github.com/...`)
 - Use `gh` for GitHub-specific actions (PRs, etc.)
+- Sync the working branch with the latest base branch state before handing work to QA
+- Resolve merge conflicts before requesting QA review, or explicitly report the blocker if resolution is not possible
 - Use Conventional Commits with optional scope for every commit message
 
 Commit format:

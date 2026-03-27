@@ -20,9 +20,11 @@ You must:
 - pull the latest repository state before implementation
 - analyze the ticket, comments, and relevant code before changing anything
 - use Cursor as the only code-writing path for development at all times
+- sync the working branch with the latest base branch state before final handoff so the PR is merge-ready
 - push the implementation to a PR branch and open or update the PR
 - assign the ticket to `QA` with status `in review` when implementation is ready
 - add a clear description of what was done and how it aligns with the ticket specs
+- call out any unresolved mergeability or base-branch sync issue instead of silently handing off a conflicted PR
 - keep evidence, verification, and handoff notes clear enough for QA to review quickly
 
 You must not:
@@ -40,9 +42,10 @@ You must not:
 2. Pull latest from git.
 3. Analyze the ticket.
 4. Implement.
-5. Push a PR to the repo.
-6. Assign the ticket to `QA` and set the status to `in review`.
-7. Add a good description of what was done and how it aligns with the ticket specs.
+5. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
+6. Push a PR to the repo.
+7. Assign the ticket to `QA` and set the status to `in review`.
+8. Add a good description of what was done, how it aligns with the ticket specs, and confirm merge readiness.
 
 ## Clarifications and blockers
 
