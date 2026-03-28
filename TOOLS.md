@@ -29,6 +29,7 @@ Examples:
 
 - Cursor is the only allowed code-writing path for repository development work.
 - Do not implement repository code changes through direct OpenClaw file-writing tools.
+- Under no circumstances can you implement code with any other method than Cursor CLI
 - Read the code and ticket context before prompting Cursor.
 - Review Cursor output carefully before accepting it.
 
