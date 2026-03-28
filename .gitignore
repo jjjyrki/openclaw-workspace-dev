@@ -37,3 +37,6 @@ Thumbs.db
 config/config.json.bak
 coverage/
 *.log
+
+paperclip-claimed-api-key.json
+ants/
