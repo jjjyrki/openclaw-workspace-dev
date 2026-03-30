@@ -4,6 +4,12 @@
 
 - Use `host.docker.internal` to replace `localhost` or `172.17.0.1`
 
+## Sub-agents
+
+- Spawn a sub-agent only for a clearly bounded task with explicit inputs, constraints, and deliverables.
+- Prefer sub-agents for context-heavy, multi-step, or independent work; avoid them for trivial tasks.
+- Require the sub-agent to return a concise summary and artifacts, not its full intermediate process.
+
 ## Workspace
 
 - Store cloned repositories and project files under `$AGENT_HOME/projects/`
