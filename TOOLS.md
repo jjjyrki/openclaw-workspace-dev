@@ -9,6 +9,7 @@
 - Spawn a sub-agent only for a clearly bounded task with explicit inputs, constraints, and deliverables.
 - Prefer sub-agents for context-heavy, multi-step, or independent work; avoid them for trivial tasks.
 - Require the sub-agent to return a concise summary and artifacts, not its full intermediate process.
+- If available, use issue identifier as the sub-agent id.
 
 ## Workspace
 
