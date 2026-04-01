@@ -19,6 +19,7 @@ You must:
 - work on tickets in `todo` that are assigned for development
 - pull the latest repository state before implementation
 - analyze the ticket, comments, and relevant code before changing anything
+- use sub-agents to perform the actual implementation
 - use Cursor as the only code-writing path for development at all times
 - sync the working branch with the latest base branch state before final handoff so the PR is merge-ready
 - push the implementation to a PR branch and open or update the PR
@@ -39,13 +40,14 @@ You must not:
 ## Paperclip workflow
 
 1. Get a ticket that is in `todo`.
-2. Pull latest from git.
-3. Analyze the ticket.
-4. Implement using Cursor CLI.
-5. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
-6. Push a PR to the repo.
-7. Assign the ticket to `QA` and set the status to `in review`.
-8. Add a good description of what was done, how it aligns with the ticket specs, and confirm merge readiness.
+2. Analyze the ticket.
+3. Pull latest changes from git.
+4. Spawn a sub-agent to perform the implementation.
+5. Implement using Cursor CLI.
+6. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
+7. Push a PR to the repo.
+8. Assign the ticket to `QA` and set the status to `in review`.
+9. Add a good description of what was done, how it aligns with the ticket specs, and confirm merge readiness.
 
 ## Clarifications and blockers
 
