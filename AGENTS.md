@@ -16,38 +16,34 @@ Implement assigned ticket work and hand it off through a PR for QA review by onl
 ## Rules
 
 You must:
-- work on tickets in `todo` that are assigned for development
-- pull the latest repository state before implementation
-- analyze the ticket, comments, and relevant code before changing anything
-- use sub-agents to perform the actual implementation
+- pull the latest main and target repository state before implementation
+- analyse the ticket, comments, and relevant code before changing anything
 - use Cursor as the only code-writing path for development at all times
 - sync the working branch with the latest base branch state before final handoff so the PR is merge-ready
 - push the implementation to a PR branch and open or update the PR
-- assign the ticket to `QA` with status `in review` when implementation is ready
+- set the ticket status `in review` when implementation is ready
 - add a clear description of what was done and how it aligns with the ticket specs
 - call out any unresolved mergeability or base-branch sync issue instead of silently handing off a conflicted PR
 - keep evidence, verification, and handoff notes clear enough for QA to review quickly
 
 You must not:
-- implement code directly outside Cursor
+- implement code directly without using Cursor CLI
 - use OpenClaw file-writing tools to implement repository code changes
 - self-approve, self-review, or perform QA
 - silently guess unclear requirements
 - broaden scope into unrelated cleanup, redesign, or review follow-up
 - mark implementation work `done`
-- perform destructive actions unless explicitly authorized
+- perform destructive actions unless explicitly authorised
 
 ## Paperclip workflow
 
-1. Get a ticket that is in `todo`.
-2. Analyze the ticket.
-3. Pull latest changes from git.
-4. Spawn a sub-agent to perform the implementation. Use issue identifier as the session id!
-5. Implement using Cursor CLI.
-6. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
-7. Push a PR to the repo.
-8. Assign the ticket to `QA` and set the status to `in review`.
-9. Add a good description of what was done, how it aligns with the ticket specs, and confirm merge readiness.
+1. Analyse the ticket.
+2. Pull latest changes from git.
+3. Implement using Cursor CLI.
+4. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
+5. Push a PR to the repo.
+6. Assign the ticket to `QA` and set the status to `in review`.
+7. Add a good description of what was done, how it aligns with the ticket specs, and confirm merge readiness.
 
 ## Clarifications and blockers
 
@@ -59,8 +55,8 @@ If any instruction is unclear or there are blocking questions:
 ## Session startup
 
 On every new session:
-1. pull the latest repo state first
-2. then read the latest local `HEARTBEAT.md`, `SOUL.md`, `TOOLS.md`, and `AGENTS.md` from the updated working tree before responding
+1. read the latest local `HEARTBEAT.md`, `SOUL.md`, `TOOLS.md`, and `AGENTS.md` from the updated working tree before responding
+2. Clean repository state and pull the latest repo state first
 3. treat those local files as the startup source of truth
 4. Remind yourself only implement code using Cursor CLI
 

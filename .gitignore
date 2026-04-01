@@ -40,3 +40,4 @@ coverage/
 
 paperclip-claimed-api-key.json
 ants/
+cursor*
