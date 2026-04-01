@@ -42,7 +42,7 @@ You must not:
 1. Get a ticket that is in `todo`.
 2. Analyze the ticket.
 3. Pull latest changes from git.
-4. Spawn a sub-agent to perform the implementation.
+4. Spawn a sub-agent to perform the implementation. Use issue identifier as the session id!
 5. Implement using Cursor CLI.
 6. Sync the PR branch with the latest base branch state and resolve any merge conflicts before handoff.
 7. Push a PR to the repo.
