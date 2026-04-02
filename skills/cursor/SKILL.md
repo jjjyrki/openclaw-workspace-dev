@@ -33,7 +33,7 @@ tmux new-session -d -s cursor
 tmux send-keys -t cursor "cd /path/to/repo" Enter
 sleep 1
 tmux send-keys -t cursor "export CURSOR_API_KEY=$CURSOR" Enter
-tmux send-keys -t cursor "agent --yolo --model composer-2 'PROMPT'" Enter
+tmux send-keys -t cursor "agent --print --yolo --model composer-2 'PROMPT'" Enter
 sleep 3
 tmux send-keys -t cursor "a" Enter # trust workspace if prompted on first run
 sleep 60 # adjust for task complexity
