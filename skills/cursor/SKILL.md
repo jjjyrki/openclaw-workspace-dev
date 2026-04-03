@@ -1,82 +1,204 @@
 ---
 name: cursor
-description: Detailed reference for Cursor CLI (`agent`). Use when delegating implementation work to Cursor, preparing Cursor automation, or passing task files, skills, and source/test context into Cursor prompts.
+description: Use this skill when delegating implementation work to Cursor. Prefer the shared Python helper instead of constructing raw Cursor CLI commands manually.
 ---
 
 # Cursor
 
-## Setup
+Use this skill when you want Cursor to implement, update, refactor, or test code in a repository.
 
-```bash
-export CURSOR_API_KEY=$CURSOR
+## Rule
+
+Do not construct raw `agent` CLI commands yourself unless there is a very specific reason to bypass the shared helper.
+
+Prefer the Python helper:
+
+```python
+from skills.tools.cursor import run_cursor
 ```
 
-## CLI command
-```bash
-agent
+## Default usage
+
+Most tasks should use this pattern:
+
+```python
+from skills.tools.cursor import run_cursor
+
+result = run_cursor(
+    prompt="Fix failing auth tests",
+    repo_path="/workspace/my-repo",
+    context_files=[
+        "/workspace/my-repo/src/auth.ts",
+        "/workspace/my-repo/tests/auth.test.ts",
+    ],
+)
 ```
 
-## Flags
+## What the helper does
 
-- `--yolo` — auto-apply all changes; required for automation.
-- `--model <name>` — prefer `composer-2` or `auto`.
-- `--trust` — trust workspace on first run.
-- `-p` / `--print` — non-interactive output (no TTY, but also no file writes); avoid for implementation tasks.
+The helper handles:
 
-## tmux pattern
+- running Cursor via `agent`
+- non-interactive execution
+- model selection
+- workspace trust
+- auto-approval
+- prompt formatting
+- `@file` context formatting
+- repo path validation
+- context file validation
 
-Use this automation pattern when running Cursor non-interactively:
+This means you should focus on:
+- writing a clear prompt
+- selecting the right repo
+- passing the most relevant files as context
 
-```bash
-tmux kill-session -t cursor 2>/dev/null || true
-tmux new-session -d -s cursor
-tmux send-keys -t cursor "cd /path/to/repo" Enter
-sleep 1
-tmux send-keys -t cursor "export CURSOR_API_KEY=$CURSOR" Enter
-tmux send-keys -t cursor "agent --print --yolo --model composer-2 'PROMPT'" Enter
-sleep 3
-tmux send-keys -t cursor "a" Enter # trust workspace if prompted on first run
-sleep 60 # adjust for task complexity
-tmux capture-pane -t cursor -p -S -200
+## Common use case
+
+Use `run_cursor()` when you need Cursor to work on code with some relevant files included as context.
+
+Example:
+
+```python
+from skills.tools.cursor import run_cursor
+
+result = run_cursor(
+    prompt="Implement token refresh and update tests.",
+    repo_path="/workspace/my-repo",
+    context_files=[
+        "/workspace/my-repo/src/auth.ts",
+        "/workspace/my-repo/tests/auth.test.ts",
+    ],
+)
 ```
 
-## Context selection
+## Choosing context files
 
-Include files in the prompt with `@`.
-More relevant context usually produces better output.
-Always include the task file at minimum.
+Include only the files that are most relevant.
 
-```text
-@/workspace/claw-plans/<project>/features/<feature>/tasks/Txxx.md
-@/workspace/<repo>/src/relevant-file.ts
-@/workspace/<repo>/tests/relevant-test.ts
+### Implementing a change
+Include:
+- the main source file
+- related tests
+- important interface or type files if needed
+
+### Fixing a bug
+Include:
+- the buggy source file
+- the failing test
+- nearby related code if necessary
+
+### Adding tests
+Include:
+- the source file under test
+- existing relevant test files
+
+Do not include large numbers of unrelated files.
+
+## Prompt guidance
+
+Write prompts that are:
+- specific
+- task-oriented
+- scoped to the requested change
+
+Good examples:
+- `Fix failing auth tests`
+- `Implement token refresh and update tests`
+- `Refactor the payment service to reduce duplication without changing behavior`
+- `Add tests for the invoice parser edge cases`
+
+Better examples:
+- `Fix the failing auth tests in the provided files. Preserve existing behavior unless a bug requires changing it. Update tests as needed.`
+- `Implement token refresh in the auth flow and update the related tests. Keep the change minimal and avoid unrelated edits.`
+
+## Public API
+
+Use:
+
+```python
+run_cursor(
+    *,
+    prompt: str,
+    repo_path: str,
+    context_files: list[str] | None = None,
+    model: str = "auto",
+    trust_workspace: bool = True,
+    auto_approve: bool = True,
+    timeout_seconds: int = 1800,
+    extra_instructions: str | None = None,
+)
 ```
 
-| Situation | Include in context |
-|---|---|
-| Implementing a task | Task file + relevant source files + test files |
-| Adding tests | Task file + source file under test + existing test files |
-| Fixing a bug | Task file + failing test + buggy source file |
-| Following a skill | SKILL.md + task file + relevant source |
+In most cases, only these are needed:
+- `prompt`
+- `repo_path`
+- `context_files`
 
-## Skills
+## Recommended pattern
 
-OpenClaw mirrors skills into the sandbox at `/workspace/skills/`.
+Prefer this:
 
-Read a skill first with the `read` tool, then pass it to Cursor:
+```python
+from skills.tools.cursor import run_cursor
 
-```text
-@/workspace/skills/<skill-name>/SKILL.md
-@/workspace/claw-plans/<project>/features/<feature>/tasks/Txxx.md
-@/workspace/<repo>/src/relevant-file.ts
-
-<your instruction here>
+result = run_cursor(
+    prompt="Implement the fix.",
+    repo_path="/workspace/my-repo",
+    context_files=[
+        "/workspace/my-repo/src/file.ts",
+        "/workspace/my-repo/tests/file.test.ts",
+    ],
+)
 ```
 
-## Automatically loaded rules
+## Avoid
 
-Cursor reads these automatically from the working directory when present:
+Avoid:
+- calling `agent` directly
+- manually building Cursor flags
+- manually formatting `@file` prompt blocks
+- passing unrelated files as context
+- giving vague prompts like `fix this`
 
-- `.cursor/rules`
-- `AGENTS.md`
-- `CLAUDE.md`
+## Environment assumptions
+
+This skill assumes:
+- `CURSOR_API_KEY` is set
+- Cursor CLI `agent` is available in `PATH`
+- `repo_path` is an absolute path
+- context files are absolute paths
+
+## Result handling
+
+`run_cursor()` returns a structured result.
+
+Typical handling:
+
+```python
+from skills.tools.cursor import run_cursor
+
+result = run_cursor(
+    prompt="Fix failing auth tests",
+    repo_path="/workspace/my-repo",
+    context_files=[
+        "/workspace/my-repo/src/auth.ts",
+        "/workspace/my-repo/tests/auth.test.ts",
+    ],
+)
+
+if not result.success:
+    print(result.stderr)
+else:
+    print(result.stdout)
+```
+
+## Summary
+
+When using Cursor:
+1. Import `run_cursor` from `skills.tools.cursor`
+2. Pass a clear prompt
+3. Pass the repo path
+4. Pass only the most relevant files as context
+5. Let the helper handle the command details
+
